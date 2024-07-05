@@ -1,0 +1,51 @@
+main p {
+    background-color: lightcyan;
+    margin: 50px;
+    padding: 10px;
+    text-align: justify;
+    border-radius: 10px;
+}
+
+div input{
+    width: 80%;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid lightcyan;
+    background-color: lightcyan;
+    font-size: 18px;
+}
+
+
+
+div span{
+    background-color: #7ab2f3;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+}
+
+div a{
+    text-decoration: none;
+    background-color: #7ab2f3;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+}
+
+.lien{
+    margin-top: 40px;
+}
+
+body{ position: relative; }
+
+footer{
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    padding-bottom: 10px;
+    width: 100%;
+    background-color: #7ab2f3;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+}
