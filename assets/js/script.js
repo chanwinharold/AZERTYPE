@@ -9,21 +9,34 @@ function afficheurScore(score, total) {
 }
 
 function lancerJeu() {
-    let i = 0, compteur = 0
+    let i = 0, compteur = 0, ListeProposition
     let btnValider = document.getElementById("btnValider")
+    let btnRadio = document.querySelectorAll('input[name="choixMotsOuPhrases"]')
 
-    afficheurListeTexte(mesMots[i])
+    btnRadio[0].addEventListener("click", () => {
+        if(btnRadio[0].checked) {
+            ListeProposition = mesMots
+            afficheurListeTexte(ListeProposition[i])
+        }
+    })
+    btnRadio[1].addEventListener("click", () => {
+        if(btnRadio[1].checked) {
+            ListeProposition = mesPhrases
+            afficheurListeTexte(ListeProposition[i])
+        }
+    })
+
     afficheurScore(compteur, i)
     btnValider.addEventListener("click", () => {
         let entrerTexte = document.getElementById("entrerTexte")
-        if(entrerTexte.value === mesMots[i]) {
+        if(entrerTexte.value === ListeProposition[i]) {
             compteur++;
         }
         entrerTexte.value = ""
         i++
         afficheurScore(compteur, i)
-        if(mesMots[i]) {
-            afficheurListeTexte(mesMots[i])
+        if(ListeProposition[i]) {
+            afficheurListeTexte(ListeProposition[i])
         } else {
             afficheurListeTexte("Fin du Jeu!")
             btnValider.disabled = true
