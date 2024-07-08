@@ -15,7 +15,7 @@ body{
     font-size: 18px;
     font-weight: 550;
     text-align: center;
-    margin: 100px 0px 100px 0px;
+    margin: 100px 0 100px 0;
     border-radius: 20px;
     line-height: 30px;
 }
@@ -173,7 +173,7 @@ body{
     opacity: 0.9;
 }
 100%{
-    bottom: 0px;
+    bottom: 0;
     opacity: 1;
 }
 
