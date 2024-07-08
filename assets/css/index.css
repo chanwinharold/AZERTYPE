@@ -41,7 +41,7 @@ body{ position: relative; }
 footer{
     display: block;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     padding-bottom: 10px;
     width: 100%;
     background-color: #7ab2f3;

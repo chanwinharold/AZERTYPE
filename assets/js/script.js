@@ -8,6 +8,10 @@ function afficheurScore(score, total) {
     return zoneScore.innerHTML = `${score} / ${total}`
 }
 
+function afficherEmail(nom, email, score) {
+    location.href = `mailto:${email}?subject=Partage du score Azertype&body=Salut, je suis ${nom} et je viens de réaliser le score ${score} sur le site d'Azertype !`
+}
+
 function lancerJeu() {
     let i = 0, compteur = 0, ListeProposition
     let btnValider = document.getElementById("btnValider")
@@ -41,5 +45,14 @@ function lancerJeu() {
             afficheurListeTexte("Fin du Jeu!")
             btnValider.disabled = true
         }
+    })
+
+    let form = document.querySelector("form")
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        let nom = document.getElementById("nom")
+        let email = document.getElementById("email")
+        let scorePartager = afficheurScore(compteur, i)
+        afficherEmail(nom, email, scorePartager)
     })
 }

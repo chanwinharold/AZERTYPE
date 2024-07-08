@@ -36,10 +36,22 @@
         <div id="zoneScore">
             Votre score: <span></span>
         </div>
+
+        <div class="popup-container" id="popupContainer">
+            <div class="popup-content">
+                <span class="close" onclick="closePopup()">&times;</span>
+                <form>
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" name="nom" placeholder="Votre nom"><br>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Votre e-mail"><br>
+                    <button>Partager</button>
+                </form>
+            </div>
+        </div>
     </main>
     <footer>
-        <label for="btnPartager"></label>
-        <input type="submit" id="btnPartager" name="btnPartager" value="Partager">
+        <button id="btnPartager" onclick="openPopup()">Partager</button>
     </footer>
 </body>
 </html>
