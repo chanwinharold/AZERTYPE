@@ -24,14 +24,6 @@ div span{
     border-radius: 5px;
 }
 
-div a{
-    text-decoration: none;
-    background-color: #7ab2f3;
-    padding: 10px;
-    color: white;
-    border-radius: 5px;
-}
-
 .lien{
     margin-top: 40px;
 }
@@ -48,4 +40,11 @@ footer{
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
 
+}
+
+form button {
+    background-color: #7ab2f3;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
 }

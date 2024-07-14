@@ -13,6 +13,9 @@ function afficherEmail(nom, email, score) {
 }
 
 function lancerJeu() {
+    recupererNomJoueur()
+    afficherNomJoueur()
+
     let i = 0, compteur = 0, ListeProposition
     let btnValider = document.getElementById("btnValider")
     let btnRadio = document.querySelectorAll('input[name="choixMotsOuPhrases"]')
@@ -54,5 +57,38 @@ function lancerJeu() {
         let email = document.getElementById("email")
         let scorePartager = afficheurScore(compteur, i)
         afficherEmail(nom, email, scorePartager)
+    })
+}
+
+function recupererNomJoueur() {
+    let form = document.querySelector("form")
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        let btnValiderPlayerName = document.getElementById("btnValiderPlayerName")
+        btnValiderPlayerName.addEventListener("click", () => {
+            let nomJoueur = document.getElementById("nomJoueur").value
+            console.log(nomJoueur)
+            localStorage.setItem("nomJoueur", nomJoueur)
+        })
+    })
+}
+
+function pageSuivante() {
+    let btnVersMain = document.getElementById("btnVersMain")
+    btnVersMain.addEventListener("click", () => {
+        window.location.href = "main.html";
+    })
+}
+
+function afficherNomJoueur() {
+    document.addEventListener("DOMContentLoaded", () => {
+        let nomDuJoueur = localStorage.getItem('nomJoueur');
+        let zoneAffichageNomJoueur = document.querySelector("p span")
+        if (nomDuJoueur) {
+            zoneAffichageNomJoueur.textContent = nomDuJoueur
+        } else {
+            zoneAffichageNomJoueur.innerHTML = `(pseudo)`;
+        }
     })
 }
