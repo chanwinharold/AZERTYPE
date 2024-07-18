@@ -1,3 +1,37 @@
+function recupererNomJoueur() {
+    let form = document.querySelector("form")
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        try {
+            let btnValiderPlayerName = document.getElementById("btnValiderPlayerName")
+            btnValiderPlayerName.addEventListener("click", () => {
+                let nomJoueur = document.getElementById("nomJoueur").value
+                localStorage.setItem("nomJoueur", nomJoueur)
+            })
+        } catch {}
+    })
+}
+
+function pageSuivante() {
+    let btnVersMain = document.getElementById("btnVersMain")
+    btnVersMain.addEventListener("click", () => {
+        window.location.href = "main.html";
+    })
+}
+
+function afficherNomJoueur() {
+    document.addEventListener("DOMContentLoaded", () => {
+        let nomDuJoueur = localStorage.getItem('nomJoueur');
+        let zoneAffichageNomJoueur = document.querySelector("p span")
+        if (nomDuJoueur) {
+            zoneAffichageNomJoueur.textContent = nomDuJoueur
+        } else {
+            zoneAffichageNomJoueur.innerHTML = `(pseudo)`;
+        }
+    })
+}
+
 function afficheurListeTexte(elementToDisplay) {
     let zoneAffichage = document.getElementById("zoneAffichage")
     return zoneAffichage.innerHTML = `${elementToDisplay}`
@@ -8,8 +42,45 @@ function afficheurScore(score, total) {
     return zoneScore.innerHTML = `${score} / ${total}`
 }
 
-function afficherEmail(nom, email, score) {
-    location.href = `mailto:${email}?subject=Partage du score Azertype&body=Salut, je suis ${nom} et je viens de réaliser le score ${score} sur le site d'Azertype !`
+function verifierNom(nom) {
+    let regex = new RegExp("^([A-Za-z0-9]{2,})$");
+    let testNom = regex.test(nom)
+    if(testNom === false) {
+        try {
+            alert("Veuillez bien renseigner ce champ")
+        } catch {}
+    }
+}
+
+function verifierEmail(email) {
+    let regex = new RegExp("^[A-Za-z0-9]+@[a-z]+[0-9]*\.+[a-z]+$");
+    let testEmail = regex.test(email)
+    if(testEmail === false) {
+        try {
+            alert("Veuillez bien renseigner ce champ")
+        } catch {}
+    }
+}
+
+function envoyerEmail(score) {
+    let form = document.querySelector("form")
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        let nom = document.getElementById("nom")
+        let email = document.getElementById("email")
+
+        nom.addEventListener("blur", (event) => {
+            let valeurNom = event.target.value
+            verifierNom(valeurNom)
+        })
+
+        email.addEventListener("blur", (event) => {
+            let valeurEmail = event.target.value
+            verifierEmail(valeurEmail)
+        })
+
+        location.href = `mailto:${email}?subject=Partage du score Azertype&body=Salut, je suis ${nom} et je viens de réaliser le score ${score} sur le site d'Azertype !`
+    })
 }
 
 function lancerJeu() {
@@ -49,46 +120,8 @@ function lancerJeu() {
             btnValider.disabled = true
         }
     })
+    let scorePartager = afficheurScore(compteur, i)
 
-    let form = document.querySelector("form")
-    form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        let nom = document.getElementById("nom")
-        let email = document.getElementById("email")
-        let scorePartager = afficheurScore(compteur, i)
-        afficherEmail(nom, email, scorePartager)
-    })
-}
-
-function recupererNomJoueur() {
-    let form = document.querySelector("form")
-    form.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        let btnValiderPlayerName = document.getElementById("btnValiderPlayerName")
-        btnValiderPlayerName.addEventListener("click", () => {
-            let nomJoueur = document.getElementById("nomJoueur").value
-            console.log(nomJoueur)
-            localStorage.setItem("nomJoueur", nomJoueur)
-        })
-    })
-}
-
-function pageSuivante() {
-    let btnVersMain = document.getElementById("btnVersMain")
-    btnVersMain.addEventListener("click", () => {
-        window.location.href = "main.html";
-    })
-}
-
-function afficherNomJoueur() {
-    document.addEventListener("DOMContentLoaded", () => {
-        let nomDuJoueur = localStorage.getItem('nomJoueur');
-        let zoneAffichageNomJoueur = document.querySelector("p span")
-        if (nomDuJoueur) {
-            zoneAffichageNomJoueur.textContent = nomDuJoueur
-        } else {
-            zoneAffichageNomJoueur.innerHTML = `(pseudo)`;
-        }
-    })
+    //Puis, on procède à l'envoi
+    envoyerEmail(scorePartager)
 }
