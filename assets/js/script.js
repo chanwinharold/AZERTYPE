@@ -49,7 +49,8 @@ function verifierNom(nom) {
         try {
             alert("Veuillez bien renseigner ce champ")
         } catch {}
-    }
+    } else
+        return true
 }
 
 function verifierEmail(email) {
@@ -59,7 +60,8 @@ function verifierEmail(email) {
         try {
             alert("Veuillez bien renseigner ce champ")
         } catch {}
-    }
+    } else
+        return true
 }
 
 function envoyerEmail(score) {
@@ -69,17 +71,15 @@ function envoyerEmail(score) {
         let nom = document.getElementById("nom")
         let email = document.getElementById("email")
 
-        nom.addEventListener("blur", (event) => {
-            let valeurNom = event.target.value
-            verifierNom(valeurNom)
-        })
+        let valeurNom =nom.value
+        let valeurEmail = email.value
 
-        email.addEventListener("blur", (event) => {
-            let valeurEmail = event.target.value
-            verifierEmail(valeurEmail)
-        })
+        verifierNom(valeurNom)
+        verifierEmail(valeurEmail)
 
-        location.href = `mailto:${email}?subject=Partage du score Azertype&body=Salut, je suis ${nom} et je viens de réaliser le score ${score} sur le site d'Azertype !`
+        if (verifierNom(valeurNom) && verifierEmail(valeurEmail)) {
+            location.href = `mailto:${email}?subject=Partage du score Azertype&body=Salut, je suis ${valeurNom} et je viens de réaliser le score ${score} sur le site d'Azertype !`
+        }
     })
 }
 
